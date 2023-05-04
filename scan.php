@@ -21,21 +21,27 @@ if($file_error == UPLOAD_ERR_OK) {
     echo 'Terajdi kesalahan saat mengunggah file';
 }
 
-$url = 'https://kayanasolusindo.com/api/v2/ocr/ktp';
+$url = 'http://127.0.0.1:8000/api/v2/ocr/ktp';
 
 $ch = curl_init();
 $data = [
     'document' => curl_file_create($target_file),
 ];
+
+$boundary = uniqid("", true);
+$delimiter = '-------------' . $boundary;
+
 curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
 curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-// curl_setopt($ch, CURLOPT_HTTPHEADER, [
-//     //"Authentication: Bearer $token",
-// ]);
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    "Authorization: Bearer 2|FMi2ijLB878Bu7fkH0djBz3iF1TEML7I1xwoopHd",
+    // 'Accept: application/json',
+    "Content-Type: multipart/form-data",
+]);
 
 $res = curl_exec($ch);
 curl_close($ch);
