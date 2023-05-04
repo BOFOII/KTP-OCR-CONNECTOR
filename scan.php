@@ -39,7 +39,7 @@ curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
 curl_setopt($ch, CURLOPT_TIMEOUT, 30);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
     "Authorization: Bearer 2|FMi2ijLB878Bu7fkH0djBz3iF1TEML7I1xwoopHd",
-    // 'Accept: application/json',
+    'Accept: application/json',
     "Content-Type: multipart/form-data",
 ]);
 
