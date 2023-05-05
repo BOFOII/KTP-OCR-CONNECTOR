@@ -1,9 +1,10 @@
 <?php
 
-$target_dir = 'C:\\xampp\htdocs\\OCR-laravel-connector\\';
+$target_dir = $_SERVER['DOCUMENT_ROOT'];
+$token = 'token';
+$url = 'https://kayanasolusindo.com/api/v2/ocr/ktp';
 
 $document = $_FILES['document'];
-
 if(!isset($document)) {
     echo 'File Not Found';
 }
@@ -21,8 +22,6 @@ if($file_error == UPLOAD_ERR_OK) {
     echo 'Terajdi kesalahan saat mengunggah file';
 }
 
-$url = 'http://127.0.0.1:8000/api/v2/ocr/ktp';
-
 $ch = curl_init();
 $data = [
     'document' => curl_file_create($target_file),
@@ -38,7 +37,7 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
 curl_setopt($ch, CURLOPT_TIMEOUT, 30);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    "Authorization: Bearer 2|FMi2ijLB878Bu7fkH0djBz3iF1TEML7I1xwoopHd",
+    "Authorization: Bearer {$token}",
     'Accept: application/json',
     "Content-Type: multipart/form-data",
 ]);
